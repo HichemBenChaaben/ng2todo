@@ -1,3 +1,16 @@
-<h1>
-  {{title}}
-</h1>
+<div>
+  <form novalidate name="todoform" (ngSubmit)="addTodo(todo.value)">
+    <label for="todo">Add a todo</label>
+    <input #todo type="text" />
+  </form>
+
+  <h3>List of todos</h3>
+  <div *ngFor="let item of todoList;let i = index">
+    <span>
+      <span #editable contenteditable (blur)="editTodo(i, editable.innerText)" (click)="displaySaveTodo(i)">
+        {{item}}
+      </span>
+      <button *ngIf="showSaveTodoBtn[i]" (click)="editTodo(i, item)">Save</button>
+      <button (click)="removeTodo(i)">x</button></span>
+  </div>
+</div>
