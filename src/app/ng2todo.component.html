@@ -1,16 +1,27 @@
-<div>
-  <form novalidate name="todoform" (ngSubmit)="addTodo(todo.value)">
-    <label for="todo">Add a todo</label>
-    <input #todo type="text" />
-  </form>
+<app-navbar></app-navbar>
 
-  <h3>List of todos</h3>
-  <div *ngFor="let item of todoList;let i = index">
-    <span>
-      <span #editable contenteditable (blur)="editTodo(i, editable.innerText)" (click)="displaySaveTodo(i)">
-        {{item}}
-      </span>
-      <button *ngIf="showSaveTodoBtn[i]" (click)="editTodo(i, item)">Save</button>
-      <button (click)="removeTodo(i)">x</button></span>
+<div class="container">
+  <div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <h4>List of todos</h4>
   </div>
+  <div class="panel-body">
+    <form novalidate name="todoform" (ngSubmit)="addTodo(todo)">
+      <label for="todo">Add a todo {{todoItem}}</label>
+      <input required [(ngModel)]="todo" type="text" />
+    </form>
+  </div>
+  <!-- List group -->
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let item of todoList;let i = index">
+      <span>
+        <span #editable contenteditable (blur)="editTodo(i, editable.innerText)" (click)="displaySaveTodo(i)">
+          {{item}}
+        </span>
+        <button *ngIf="showSaveTodoBtn[i]" (click)="editTodo(i, item)" class="btn btn-default btn-sm">Save</button>
+        <button (click)="removeTodo(i)" class="btn btn-danger btn-sm">x</button>
+      </span>
+    </li>
+  </ul>
 </div>
